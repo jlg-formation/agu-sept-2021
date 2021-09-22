@@ -29,4 +29,8 @@ export class ArticleService {
   ];
 
   constructor() {}
+
+  addArticle(a: Article) {
+    this.articles.push(a);
+  }
 }
