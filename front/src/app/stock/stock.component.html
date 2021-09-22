@@ -3,7 +3,7 @@
   <div class="content">
     <nav>
       <button routerLink="add">Ajouter</button>
-      <button>Supprimer</button>
+      <button *ngIf="selectedArticles.size > 0">Supprimer</button>
     </nav>
     <table>
       <thead>
