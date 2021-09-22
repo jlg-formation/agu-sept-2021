@@ -31,5 +31,9 @@ table {
     .qty {
       text-align: right;
     }
+
+    tr.selected {
+      background-color: #ccc;
+    }
   }
 }
