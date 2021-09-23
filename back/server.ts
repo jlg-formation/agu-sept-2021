@@ -11,7 +11,7 @@ function generateId() {
   return Date.now() + "_" + Math.floor(Math.random() * 1e9);
 }
 
-const articles: Article[] = [
+let articles: Article[] = [
   {
     id: "a1",
     name: "Tournevis",
@@ -26,7 +26,7 @@ const articles: Article[] = [
   },
 ];
 
-app.use(cors());
+app.use("/api", cors());
 app.use(express.json());
 
 app.use((req, res, next) => {
@@ -43,6 +43,12 @@ app.post("/api/articles", (req, res) => {
   article.id = generateId();
   articles.push(article);
   res.status(201).json(article);
+});
+
+app.delete("/api/articles", (req, res) => {
+  const ids = req.body as string[];
+  articles = articles.filter((a) => !ids.includes(a.id));
+  res.status(204).end();
 });
 
 app.use(express.static(dir));
