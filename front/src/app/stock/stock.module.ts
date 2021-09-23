@@ -1,13 +1,18 @@
-import { NgModule } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AddComponent } from './add/add.component';
 import { StockRoutingModule } from './stock-routing.module';
 import { StockComponent } from './stock.component';
-import { AddComponent } from './add/add.component';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [StockComponent, AddComponent],
-  imports: [CommonModule, StockRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    StockRoutingModule,
+    ReactiveFormsModule,
+    FontAwesomeModule,
+  ],
 })
 export class StockModule {}

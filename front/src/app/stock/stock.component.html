@@ -2,9 +2,15 @@
   <h1>Liste des articles</h1>
   <div class="content">
     <nav>
-      <button routerLink="add">Ajouter</button>
-      <button (click)="remove()" [hidden]="selectedArticles.size === 0">
-        Supprimer
+      <button routerLink="add" aria-label="Add">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
+      <button
+        (click)="remove()"
+        [hidden]="selectedArticles.size === 0"
+        aria-label="Remove"
+      >
+        <fa-icon [icon]="faTrashAlt"></fa-icon>
       </button>
     </nav>
     <table>
