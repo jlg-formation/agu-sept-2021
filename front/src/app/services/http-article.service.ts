@@ -4,6 +4,8 @@ import { ArticleService } from './article.service';
 import { Article } from '../interfaces/article';
 import { map } from 'rxjs/operators';
 
+const url = 'http://localhost:3000/api/articles';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -14,9 +16,25 @@ export class HttpArticleService extends ArticleService {
     this.refresh();
   }
 
+  addArticle(a: Article) {
+    super.addArticle(a);
+    this.http.post<void>(url, a).subscribe({
+      next: () => {
+        console.log('success');
+        this.refresh();
+      },
+      complete: () => {
+        console.log('complete');
+      },
+      error: (err) => {
+        console.log('err: ', err);
+      },
+    });
+  }
+
   refresh() {
     this.http
-      .get<Article[]>('http://localhost:3000/api/articles')
+      .get<Article[]>(url)
       .pipe
       // map((articles) => {
       //   articles.forEach((a) => (a.name = a.name.toUpperCase()));
