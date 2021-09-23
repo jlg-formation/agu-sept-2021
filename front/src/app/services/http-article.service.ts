@@ -13,6 +13,16 @@ export class HttpArticleService extends ArticleService {
   }
 
   refresh() {
-    this.http.get('http://localhost:3000/api/articles');
+    this.http.get('http://localhost:3000/api/articles').subscribe({
+      next: (data) => {
+        console.log('data: ', data);
+      },
+      complete: () => {
+        console.log('complete');
+      },
+      error: (err) => {
+        console.log('err: ', err);
+      },
+    });
   }
 }
