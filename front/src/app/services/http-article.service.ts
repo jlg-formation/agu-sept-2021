@@ -44,8 +44,7 @@ export class HttpArticleService extends ArticleService {
       .subscribe({
         next: (articles) => {
           console.log('articles: ', articles);
-          this.articles = articles;
-          this.save();
+          this.articles$.next(articles);
         },
         complete: () => {
           console.log('complete');

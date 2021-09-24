@@ -1,36 +1,38 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Article } from '../interfaces/article';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
-  articles!: Article[];
+  articles$ = new BehaviorSubject<Article[]>(this.readArticles());
 
   constructor() {
-    this.load();
+    this.articles$.subscribe({
+      next: (articles) => {
+        localStorage.setItem('articles', JSON.stringify(articles));
+      },
+    });
   }
 
   addArticle(a: Article) {
-    this.articles.push(a);
-    this.save();
+    this.articles$.value.push(a);
+    this.articles$.next(this.articles$.value);
   }
 
-  load() {
+  readArticles(): Article[] {
     const str = localStorage.getItem('articles');
     if (!str) {
-      this.articles = [];
-      return;
+      return [];
     }
-    this.articles = JSON.parse(str);
+    return JSON.parse(str);
   }
 
   remove(selectedArticles: Set<Article>) {
-    this.articles = this.articles.filter((a) => !selectedArticles.has(a));
-    this.save();
-  }
-
-  save() {
-    localStorage.setItem('articles', JSON.stringify(this.articles));
+    const articles = this.articles$.value.filter(
+      (a) => !selectedArticles.has(a)
+    );
+    this.articles$.next(articles);
   }
 }
