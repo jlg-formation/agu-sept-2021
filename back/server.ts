@@ -5,7 +5,7 @@ import serveIndex from "serve-index";
 import { Article } from "../front/src/app/interfaces/article";
 
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 const dir = resolve(process.cwd(), "../front/dist/front");
 
 function generateId() {
