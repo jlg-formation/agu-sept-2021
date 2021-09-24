@@ -1,0 +1,33 @@
+table {
+  border: 0.1em solid #bbb;
+  border-collapse: collapse;
+  td,
+  th {
+    padding: 0.5em 1em;
+  }
+
+  thead {
+    background-color: #bbb;
+  }
+
+  tbody {
+    tr:nth-child(even) {
+      background-color: #eee;
+    }
+
+    cursor: pointer;
+
+    tr:hover {
+      background-color: #ddd;
+    }
+
+    .price,
+    .qty {
+      text-align: right;
+    }
+
+    tr.selected {
+      background-color: #ccc;
+    }
+  }
+}

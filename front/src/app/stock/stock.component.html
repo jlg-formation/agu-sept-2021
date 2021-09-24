@@ -13,25 +13,9 @@
         <fa-icon [icon]="faTrashAlt"></fa-icon>
       </button>
     </nav>
-    <table>
-      <thead>
-        <tr>
-          <th class="name">Nom</th>
-          <th class="price">Prix</th>
-          <th class="qty">Quantité</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          [class.selected]="selectedArticles.has(a)"
-          (click)="toggle(a)"
-          *ngFor="let a of articleService.articles$ | async"
-        >
-          <td class="name">{{ a.name | ellipsis: 11 }}</td>
-          <td class="price">{{ a.price | currency }}</td>
-          <td class="qty">{{ a.qty }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <app-article-table
+      [articles]="articleService.articles$ | async"
+      (articleToggle)="setSelectedArticle($event)"
+    ></app-article-table>
   </div>
 </main>
