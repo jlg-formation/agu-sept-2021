@@ -1,11 +1,12 @@
 import cors from "cors";
 import express from "express";
+import { resolve } from "path";
 import serveIndex from "serve-index";
 import { Article } from "../front/src/app/interfaces/article";
 
 const app = express();
-const port = 3000;
-const dir = "../front/dist/front";
+const port = process.env.port || 3000;
+const dir = resolve(process.cwd(), "../front/dist/front");
 
 function generateId() {
   return Date.now() + "_" + Math.floor(Math.random() * 1e9);
@@ -53,6 +54,10 @@ app.delete("/api/articles", (req, res) => {
 
 app.use(express.static(dir));
 app.use(serveIndex(dir, { icons: true }));
+
+app.use((req, res) => {
+  res.sendFile(dir + "/index.html");
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
