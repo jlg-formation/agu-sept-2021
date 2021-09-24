@@ -4,7 +4,7 @@ import { ArticleService } from './article.service';
 import { Article } from '../interfaces/article';
 import { map } from 'rxjs/operators';
 
-const url = 'http://localhost:3000/api/articles';
+const url = '/api/articles';
 
 @Injectable({
   providedIn: 'root',
